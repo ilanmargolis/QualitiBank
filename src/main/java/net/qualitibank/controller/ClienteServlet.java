@@ -1,74 +1,133 @@
 package net.qualitibank.controller;
 
 import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.qualitibank.dao.ClienteDAO;
+import net.qualitibank.model.Cliente;
+
 /**
- * Servlet implementation class ControllerServlet
+ * Servlet implementation class ClienteServlet
  */
-@WebServlet("/cliente")
+@javax.servlet.annotation.WebServlet({ "/", "/cliente" })
 public class ClienteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ClienteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String action = request.getParameter("action");
-		if (action == null) {
-			doGet_Index(request, response);
-		} else {
-			if (action.equalsIgnoreCase("novo")) {
-				doGet_novo(request, response);
-			} else if (action.equalsIgnoreCase("listagem")) {
-				doGet_listagem(request, response);
-			} else if (action.equalsIgnoreCase("editar")) {
-				doGet_editar(request, response);
-			} else if (action.equalsIgnoreCase("deletar")) {
-				doGet_deletar(request, response);
-			}
-		}
-	}	
-	
-	protected void doGet_Index(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		request.getRequestDispatcher("/form-principal.jsp").forward(request, response);
+	public ClienteServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	protected void doGet_novo(HttpServletRequest request, HttpServletResponse response)
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("msg", "Estou em novo cliente");
-		request.getRequestDispatcher("/menu.jsp").forward(request, response);
+
+		String action = request.getParameter("action");
+
+		if (action == null) {
+			doGet_index(request, response);
+		} else if (action.equalsIgnoreCase("listagem")) {
+			doGet_listagem(request, response);
+		} else if (action.equalsIgnoreCase("novo")) {
+			doGet_novo(request, response);
+		} else if (action.equalsIgnoreCase("editar")) {
+			doGet_editar(request, response);
+		} else if (action.equalsIgnoreCase("deletar")) {
+			doGet_deletar(request, response);
+		}
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		String action = request.getParameter("action");
+
+		if (action == null) {
+			doGet_index(request, response);
+		} else if (action.equalsIgnoreCase("inserir")) {
+			doGet_inserir(request, response);
+		} else if (action.equalsIgnoreCase("alterar")) {
+			doGet_alterar(request, response);
+		}
+	}
+
+	protected void doGet_index(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		doGet_listagem(request, response);
 	}
 
 	protected void doGet_listagem(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("msg", "Estou listando clientes");
-		request.getRequestDispatcher("/menu.jsp").forward(request, response);
-	}	
+		
+		List<Cliente> clienteList = ClienteDAO.getInstance().getAll();
+		request.setAttribute("clientes", clienteList);
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-list.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	protected void doGet_novo(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");		
+		dispatcher.forward(request, response);
+	}
 
 	protected void doGet_editar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("msg", "Estou editando cliente");
-		request.getRequestDispatcher("/menu.jsp").forward(request, response);
-	}	
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		Cliente cliente = ClienteDAO.getInstance().getById(id);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");
+		request.setAttribute("cliente", cliente);
+		dispatcher.forward(request, response);
+	}
+
+	protected void doGet_inserir(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		Cliente cliente = new Cliente(nome, email);
+
+		ClienteDAO.getInstance().persist(cliente);
+		
+		response.sendRedirect(request.getContextPath());
+	}
+
+	protected void doGet_alterar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		Cliente cliente = new Cliente(id, nome, email);
+		ClienteDAO.getInstance().merge(cliente);
+
+		response.sendRedirect(request.getContextPath());
+	}
 
 	protected void doGet_deletar(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("msg", "Estou deletando cliente");
-		request.getRequestDispatcher("/menu.jsp").forward(request, response);
-	}	
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		ClienteDAO.getInstance().removeById(id);
+
+		response.sendRedirect(request.getContextPath());
+	}
 }

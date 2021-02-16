@@ -1,9 +1,11 @@
 package net.qualitibank.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.Pattern;
 
 @Entity
 public class Cliente {
@@ -12,9 +14,21 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
 	private String nome;
-	
+	private String email;
+
 	public Cliente() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public Cliente(String nome, String email) {
+		this.nome = nome;
+		this.email = email;
+	}
+
+	public Cliente(int id, String nome, String email) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
 	}
 
 	public int getId() {
@@ -33,8 +47,16 @@ public class Cliente {
 		this.nome = nome;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", nome=" + nome + "]";
+		return "Cliente [id=" + id + ", nome=" + nome + ", email=" + email + "]";
 	}
 }
