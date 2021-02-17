@@ -5,15 +5,17 @@
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/css/qualitibank.css" />" />	
 <title>Cadastro de cliente</title>
 </head>
 <body>
 	<div align="center">
 		<h1>Qualiti Bank</h1>
 		<h2>
-			<a href="${pageContext.request.contextPath}/cliente?action=novo">Novo
-				cliente</a> &nbsp;&nbsp;&nbsp; <a
-				href="${pageContext.request.contextPath}/cliente?action=listagem">Listagem
+			<a href="${pageContext.request.contextPath}/cliente?action=listagem"><img
+				class="icone_g"
+				src="${pageContext.request.contextPath}/images/listar.png">Listagem
 				de clientes</a>
 		</h2>
 
@@ -28,10 +30,14 @@
 	</div>
 	<div>
 		<c:if test="${cliente != null}">
-			<form action="${pageContext.request.contextPath}/cliente?action=alterar&id=<c:out value='${cliente.id}'/>" method="post">
+			<form
+				action="${pageContext.request.contextPath}/cliente?action=alterar"
+				method="post">
 		</c:if>
 		<c:if test="${cliente == null}">
-			<form action="${pageContext.request.contextPath}/cliente?action=inserir" method="post">
+			<form
+				action="${pageContext.request.contextPath}/cliente?action=inserir"
+				method="post">
 		</c:if>
 		<div class="formPadrao">
 			<c:if test="${cliente != null}">

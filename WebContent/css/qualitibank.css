@@ -1,0 +1,31 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: yellow;
+}
+
+body h2 {
+	font-size: 30px;
+	font-weight: bold;
+	
+}
+
+h2.contaCliente {
+	color: red;	
+}
+
+.icone_p {
+	width: 20px;
+	height: 20px;
+}
+
+.icone_m {
+	width: 24px;
+	height: 24px;
+}
+
+.icone_g {
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}

@@ -1,20 +1,27 @@
 package net.qualitibank.model;
 
-import javax.persistence.Column;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.constraints.Pattern;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private int id;
+	private Integer id;
 	private String nome;
 	private String email;
+	
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Conta> accounts;
+	
 
 	public Cliente() {
 	}
@@ -31,6 +38,14 @@ public class Cliente {
 		this.email = email;
 	}
 
+	public Cliente(Integer id, String nome, String email, List<Conta> accounts) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.accounts = accounts;
+	}
+		
 	public int getId() {
 		return id;
 	}

@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Informação de erros</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<h1>Houve um erro</h1>
+
 </body>
 </html>
