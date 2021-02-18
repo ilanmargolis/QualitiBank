@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,10 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Qualiti Bank</h1>
-		<h2 class="contaCliente">Contas do cliente: ${cliente.nome}</h2>
-		<h2>
-			<a href="${pageContext.request.contextPath}/conta?action=nova&cliente_id=<c:out value='${cliente.id}'/>"><img
+		<div class="logomarca"></div>
+		<h2 class="menu">
+			<a
+				href="${pageContext.request.contextPath}/conta?action=nova&cliente_id=<c:out value='${cliente.id}'/>"><img
 				class="icone_g"
 				src="${pageContext.request.contextPath}/images/adicionar.png">Nova
 				conta</a> &nbsp;&nbsp;&nbsp; <a
@@ -25,33 +26,35 @@
 				src="${pageContext.request.contextPath}/images/listar.png">Listagem
 				de clientes</a>
 		</h2>
+		<div class="contaCliente">Contas do cliente: ${cliente.nome}</div>
 	</div>
 	<div align="center">
-		<table class="table table-striped table-bordered" style="width: 100%">
+		<table class="table table-bordered table-striped" style="width: 100%">
 			<tr class="thead-dark">
-				<th scope="col">Número</th>
-				<th scope="col">Saldo</th>
-				<th scope="col">Ações</th>
+				<th scope="col">NÃºmero</th>
+				<th scope="col">Tipo da conta</th>
+				<th scope="col" class="text-right">Saldo</th>
+				<th scope="col">AÃ§Ãµes</th>
 			</tr>
 			<c:forEach var="conta" items="${contas}">
-				<tr>
+				<tr class="thead-light">
 					<td scope="row"><c:out value="${conta.numero}" /></td>
-					<td><c:out value="${conta.saldo}" /></td>
+					<td scope="row"><c:out value="${conta.tipo}" /></td>
+					<td class="text-right"><fmt:formatNumber
+							value="${conta.saldo}" type="currency" /></td>
 					<td><a
 						href="${pageContext.request.contextPath}/conta?action=creditar&id=<c:out value='${conta.id}'/>"><img
 							class="icone_p"
 							src="${pageContext.request.contextPath}/images/creditar.png"
-							alt="Creditar""></a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
+							alt="Creditar"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="${pageContext.request.contextPath}/conta?action=debitar&id=<c:out value='${conta.id}'/>"><img
 							class="icone_p"
 							src="${pageContext.request.contextPath}/images/debitar.png"
-							alt="Debitar""></a>
-						&nbsp;&nbsp;&nbsp;&nbsp; <a
+							alt="Debitar"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="${pageContext.request.contextPath}/cliente?action=transferir&id=<c:out value='${conta.id}'/>"><img
 							class="icone_p"
 							src="${pageContext.request.contextPath}/images/transferir.png"
-							alt="Transferir""></a></td>
+							alt="Transferir"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

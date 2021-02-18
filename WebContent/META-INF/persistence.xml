@@ -13,6 +13,8 @@
 
 		<class>net.qualitibank.model.Cliente</class>
 		<class>net.qualitibank.model.Conta</class>
+		<class>net.qualitibank.model.Poupanca</class>
+		<class>net.qualitibank.model.Bonificada</class>
 
 		<properties>
 			<!-- DADOS CONEXÃO -->

@@ -11,14 +11,19 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Qualiti Bank</h1>
-		<h2>
-			<a href="${pageContext.request.contextPath}/conta?action=listagem&cliente_id=<c:out value='${cliente.id}'/>"><img
+		<div class="logomarca"></div>
+		<h2 class="menu">
+			<a
+				href="${pageContext.request.contextPath}/conta?action=listagem&cliente_id=<c:out value='${cliente.id}'/>"><img
 				class="icone_g"
 				src="${pageContext.request.contextPath}/images/listar.png">Listagem
-				de contas</a>
+				de contas</a> &nbsp;&nbsp;&nbsp; <a
+				href="${pageContext.request.contextPath}/cliente?action=listagem"><img
+				class="icone_g"
+				src="${pageContext.request.contextPath}/images/listar.png">Listagem
+				de clientes</a>
 		</h2>
-		
+		<h2 class="tipoTela">Nova conta</h2>
 	</div>
 	<div>
 		<form action="${pageContext.request.contextPath}/conta?action=inserir"
@@ -32,7 +37,12 @@
 				<div class="form-group">
 					<label for="numeroConta">Número</label> <input type="text"
 						class="form-control" id="numeroCliente" name="numero" size="45"
-						value="<c:out value='${conta.numero}' />">
+						value="<c:out value='${conta.numero}' />"> <select
+						name="tipo">
+						<option value="Conta">Conta</option>
+						<option value="Poupanca">Poupança</option>
+						<option value="Bonificada">Bonificada</option>
+					</select>
 				</div>
 
 				<button type="submit" class="btn btn-primary" value="Salvar">Enviar</button>

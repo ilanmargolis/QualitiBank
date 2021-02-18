@@ -14,6 +14,9 @@ import net.qualitibank.dao.ClienteDAO;
 import net.qualitibank.dao.ContaDAO;
 import net.qualitibank.model.Cliente;
 import net.qualitibank.model.Conta;
+import net.qualitibank.model.Bonificada;
+import net.qualitibank.model.Poupanca;
+import net.qualitibank.model.Tipo;
 
 /**
  * Servlet implementation class ContaServlet
@@ -104,10 +107,19 @@ public class ContaServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String numero = request.getParameter("numero");
+		String tipo = request.getParameter("tipo");
 		String cliente_id = request.getParameter("cliente_id");
 		Cliente cliente = ClienteDAO.getInstance().getById(cliente_id);
 		
-		Conta conta = new Conta(numero, cliente);
+		Conta conta = null;
+		
+		if (tipo.equals("Conta")) {
+			conta = new Conta(numero, cliente);
+		} else if (tipo.equals("Poupanca")) {
+			conta = new Poupanca(numero, cliente);
+		} else if (tipo.equals("Bonificada")) {
+			conta = new Bonificada(numero, cliente);
+		}
 
 		ContaDAO.getInstance().persist(conta);
 		

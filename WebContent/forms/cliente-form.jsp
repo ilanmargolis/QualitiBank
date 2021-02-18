@@ -6,20 +6,20 @@
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet"
-	href="<c:url value="/css/qualitibank.css" />" />	
+	href="<c:url value="/css/qualitibank.css" />" />
 <title>Cadastro de cliente</title>
 </head>
 <body>
 	<div align="center">
-		<h1>Qualiti Bank</h1>
-		<h2>
+		<div class="logomarca"></div>
+		<h2 class="menu">
 			<a href="${pageContext.request.contextPath}/cliente?action=listagem"><img
 				class="icone_g"
 				src="${pageContext.request.contextPath}/images/listar.png">Listagem
 				de clientes</a>
 		</h2>
 
-		<h2>
+		<h2 class="tipoTela">
 			<c:if test="${cliente != null}">
             			Editar
             		</c:if>

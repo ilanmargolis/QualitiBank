@@ -11,8 +11,8 @@
 </head>
 <body>
 	<div align="center">
-		<h1>Qualiti Bank</h1>
-		<h2>
+		<div class="logomarca"></div>
+		<h2 class="menu">
 			<a href="${pageContext.request.contextPath}/cliente?action=novo"><img
 				class="icone_g"
 				src="${pageContext.request.contextPath}/images/adicionar.png">Novo
@@ -20,7 +20,7 @@
 		</h2>
 	</div>
 	<div align="center">
-		<table class="table table-striped table-bordered" style="width: 100%">
+		<table class="table table-bordered table-striped" style="width: 100%">
 			<tr class="thead-dark">
 				<th scope="col">ID</th>
 				<th scope="col">Nome</th>
@@ -28,7 +28,7 @@
 				<th scope="col">Ações</th>
 			</tr>
 			<c:forEach var="cliente" items="${clientes}">
-				<tr>
+				<tr class="thead-light">
 					<td scope="row"><c:out value="${cliente.id}" /></td>
 					<td><c:out value="${cliente.nome}" /></td>
 					<td><c:out value="${cliente.email}" /></td>
@@ -39,12 +39,12 @@
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="${pageContext.request.contextPath}/cliente?action=editar&id=<c:out value='${cliente.id}'/>"><img
 							class="icone_p"
-							src="${pageContext.request.contextPath}/images/editar.png""></a>
+							src="${pageContext.request.contextPath}/images/editar.png"></a>
 						&nbsp;&nbsp;&nbsp;&nbsp; <a
 						href="${pageContext.request.contextPath}/cliente?action=deletar&id=<c:out value='${cliente.id}'/>"><img
 							class="icone_p"
 							src="${pageContext.request.contextPath}/images/deletar.png"
-							alt="Deletar""></a></td>
+							alt="Deletar"></a></td>
 				</tr>
 			</c:forEach>
 		</table>

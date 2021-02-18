@@ -1,17 +1,32 @@
 @charset "ISO-8859-1";
 
 body {
-	background-color: yellow;
+	background-color: rgb(7, 96, 228);
+	background-image: url("../images/bg_qualiti.png")
 }
 
-body h2 {
+tr.thead-light {
+	background-color: white;	
+}
+
+.logomarca {
+	height: 180px;
+	background-color: graytext;
+	background-image: url("../images/logomarca.png");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.menu, .tipoTela, .contaCliente {
 	font-size: 30px;
 	font-weight: bold;
-	
+	background-color: white;
+	margin-bottom: -5px;	
 }
 
-h2.contaCliente {
-	color: red;	
+.contaCliente {
+	color: red;
+	margin-bottom: 0;
 }
 
 .icone_p {
@@ -28,4 +43,5 @@ h2.contaCliente {
 	width: 40px;
 	height: 40px;
 	margin-right: 10px;
+	margin-bottom: 5px;
 }
