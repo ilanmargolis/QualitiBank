@@ -5,11 +5,11 @@
 
 ## Requisitos técnicos utilizados
 * Estruturar a aplicação em camadas
-* Uso de banco de dados relacional/SQL MySQL
 * Processo de build utilizando Maven
-* Persistência utilizando JPA
-* JavaSE-12
-* Front-end em HTML5, JSP e Bootstrap
+* Banco de dados relacional/SQL MySQL
+* Persistência utilizando JPA e Hibernate
+* Desenvolvido em JavaSE-12
+* Front-end em HTML5, CSS3, JSP e Bootstrap
 
 ## Ferramentas utilizadas
 * Git 2.30.1
