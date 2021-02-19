@@ -14,9 +14,9 @@ import net.qualitibank.dao.ClienteDAO;
 import net.qualitibank.dao.ContaDAO;
 import net.qualitibank.model.Cliente;
 import net.qualitibank.model.Conta;
+import net.qualitibank.model.Operacao;
 import net.qualitibank.model.Bonificada;
 import net.qualitibank.model.Poupanca;
-import net.qualitibank.model.Tipo;
 
 /**
  * Servlet implementation class ContaServlet
@@ -115,7 +115,7 @@ public class ContaServlet extends HttpServlet {
 		
 		if (tipo.equals("Conta")) {
 			conta = new Conta(numero, cliente);
-		} else if (tipo.equals("Poupanca")) {
+		} else if (tipo.equals("Poupança")) {
 			conta = new Poupanca(numero, cliente);
 		} else if (tipo.equals("Bonificada")) {
 			conta = new Bonificada(numero, cliente);
@@ -132,9 +132,13 @@ public class ContaServlet extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		Conta conta = ContaDAO.getInstance().getById(id);
+		Cliente cliente = conta.getCliente();
+		Operacao operacao = Operacao.CREDITO;
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/conta-form.jsp");
 		request.setAttribute("conta", conta);
+		request.setAttribute("cliente", cliente);
+		request.setAttribute("operacao", "operacao123");
 		dispatcher.forward(request, response);
 	}
 

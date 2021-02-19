@@ -1,5 +1,7 @@
 package net.qualitibank.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +13,11 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Conta {
+//@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
+//@DiscriminatorValue("C")
+public class Conta implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
@@ -88,7 +93,7 @@ public class Conta {
 	public void setSaldo(Double saldo) {
 		this.saldo = saldo;
 	}
-	
+
 	public String getTipo() {
 		return tipo;
 	}

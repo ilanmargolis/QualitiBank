@@ -6,7 +6,7 @@ body {
 }
 
 tr.thead-light {
-	background-color: white;	
+	background-color: white;
 }
 
 .logomarca {
@@ -21,12 +21,22 @@ tr.thead-light {
 	font-size: 30px;
 	font-weight: bold;
 	background-color: white;
-	margin-bottom: -5px;	
+	margin-bottom: -5px;
 }
 
 .contaCliente {
 	color: red;
 	margin-bottom: 0;
+}
+
+.rodape {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: graytext;
+	color: white;
+	text-align: center;
 }
 
 .icone_p {
