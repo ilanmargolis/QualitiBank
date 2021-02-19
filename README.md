@@ -6,6 +6,7 @@
 ## Requisitos técnicos utilizados
 * Estruturar a aplicação em camadas
 * Processo de build utilizando Maven
+* Servidor de aplicação Wildfly
 * Banco de dados relacional/SQL MySQL
 * Persistência utilizando JPA e Hibernate
 * Desenvolvido em JavaSE-12
