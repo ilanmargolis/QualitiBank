@@ -7,7 +7,7 @@
 * Estruturar a aplicação em camadas
 * Processo de build utilizando Maven
 * Servidor de aplicação Wildfly
-* Banco de dados relacional/SQL MySQL
+* Banco de dados relacional/SQL
 * Persistência utilizando JPA e Hibernate
 * Desenvolvido em JavaSE-12
 * Front-end em HTML5, CSS3, JSP e Bootstrap
