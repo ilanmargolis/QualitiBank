@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 @Entity
 //@DiscriminatorValue(value = "B")
 public class Bonificada extends Conta{
-	private static final long serialVersionUID = 1L;
 	private static final double TAXA_BONUS = .01;
 	private double bonus;
 	

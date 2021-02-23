@@ -20,7 +20,7 @@ public class Cliente {
 	private String email;
 	
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private List<Conta> accounts;
+	private List<Conta> contas;
 	
 
 	public Cliente() {
@@ -38,12 +38,12 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public Cliente(Integer id, String nome, String email, List<Conta> accounts) {
+	public Cliente(Integer id, String nome, String email, List<Conta> contas) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.accounts = accounts;
+		this.contas = contas;
 	}
 		
 	public int getId() {
@@ -68,6 +68,14 @@ public class Cliente {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public List<Conta> getContas() {
+		return contas;
+	}
+
+	public void setContas(List<Conta> contas) {
+		this.contas = contas;
 	}
 
 	@Override

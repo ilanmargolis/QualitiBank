@@ -38,44 +38,47 @@ public class ClienteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String action = request.getParameter("action");
-
-		if (action == null) {
-			doGet_index(request, response);
-		} else if (action.equalsIgnoreCase("listagem")) {
-			doGet_listagem(request, response);
-		} else if (action.equalsIgnoreCase("novo")) {
-			doGet_novo(request, response);
-		} else if (action.equalsIgnoreCase("editar")) {
-			doGet_editar(request, response);
-		} else if (action.equalsIgnoreCase("deletar")) {
-			doGet_deletar(request, response);
+		try {
+			if (action == null) {
+				doGet_index(request, response);
+			} else if (action.equalsIgnoreCase("listagem")) {
+				doGet_listagem(request, response);
+			} else if (action.equalsIgnoreCase("novo")) {
+				doGet_novo(request, response);
+			} else if (action.equalsIgnoreCase("editar")) {
+				doGet_editar(request, response);
+			} else if (action.equalsIgnoreCase("deletar")) {
+				doGet_deletar(request, response);
+			}
+		} catch (Exception e) {
+			throw new ServletException();
 		}
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String action = request.getParameter("action");
 
 		if (action == null) {
 			doGet_index(request, response);
 		} else if (action.equalsIgnoreCase("inserir")) {
-			doGet_inserir(request, response);
+			doPost_inserir(request, response);
 		} else if (action.equalsIgnoreCase("alterar")) {
-			doGet_alterar(request, response);
+			doPost_alterar(request, response);
 		}
 	}
 
 	protected void doGet_index(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		doGet_listagem(request, response);
 	}
 
 	protected void doGet_listagem(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		List<Cliente> clienteList = ClienteDAO.getInstance().getAll();
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-list.jsp");
@@ -83,10 +86,11 @@ public class ClienteServlet extends HttpServlet {
 		dispatcher.forward(request, response);
 	}
 
+	// SELEÇÃO DE ITENS DE MENU
 	protected void doGet_novo(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");		
+
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");
 		dispatcher.forward(request, response);
 	}
 
@@ -95,36 +99,10 @@ public class ClienteServlet extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		Cliente cliente = ClienteDAO.getInstance().getById(id);
-		
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-form.jsp");
 		request.setAttribute("cliente", cliente);
 		dispatcher.forward(request, response);
-	}
-
-	protected void doGet_inserir(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		Cliente cliente = new Cliente(nome, email);
-
-		ClienteDAO.getInstance().persist(cliente);
-		
-		response.sendRedirect(request.getContextPath());
-	}
-
-	protected void doGet_alterar(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		int id = Integer.parseInt(request.getParameter("id"));
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		List<Conta> contas = ContaDAO.getInstance().getContasCliente(id);
-		Cliente cliente = new Cliente(id, nome, email, contas);
-		
-		ClienteDAO.getInstance().merge(cliente);
-
-		response.sendRedirect(request.getContextPath());
 	}
 
 	protected void doGet_deletar(HttpServletRequest request, HttpServletResponse response)
@@ -132,6 +110,33 @@ public class ClienteServlet extends HttpServlet {
 
 		int id = Integer.parseInt(request.getParameter("id"));
 		ClienteDAO.getInstance().removeById(id);
+
+		response.sendRedirect(request.getContextPath());
+	}
+
+	// PERSISTENCIA DE DADOS NO BANCO
+	protected void doPost_inserir(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		Cliente cliente = new Cliente(nome, email);
+
+		ClienteDAO.getInstance().persist(cliente);
+
+		response.sendRedirect(request.getContextPath());
+	}
+
+	protected void doPost_alterar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		String nome = request.getParameter("nome");
+		String email = request.getParameter("email");
+		List<Conta> contas = ContaDAO.getInstance().getContasCliente(id);
+		Cliente cliente = new Cliente(id, nome, email, contas);
+
+		ClienteDAO.getInstance().merge(cliente);
 
 		response.sendRedirect(request.getContextPath());
 	}

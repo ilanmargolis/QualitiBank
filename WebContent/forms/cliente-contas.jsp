@@ -37,7 +37,7 @@
 					<th scope="col" class="text-right">Saldo</th>
 					<th scope="col">Ações</th>
 				</tr>
-				<c:forEach var="conta" items="${contas}">
+				<c:forEach var="conta" items="${cliente.contas}">
 					<tr class="thead-light">
 						<td scope="row"><c:out value="${conta.numero}" /></td>
 						<td scope="row"><c:out value="${conta.tipo}" /></td>
@@ -52,7 +52,7 @@
 								class="icone_p"
 								src="${pageContext.request.contextPath}/images/debitar.png"
 								alt="Debitar"></a> &nbsp;&nbsp;&nbsp;&nbsp; <a
-							href="${pageContext.request.contextPath}/cliente?action=transferir&id=<c:out value='${conta.id}'/>"><img
+							href="${pageContext.request.contextPath}/conta?action=transferir&id=<c:out value='${conta.id}'/>"><img
 								class="icone_p"
 								src="${pageContext.request.contextPath}/images/transferir.png"
 								alt="Transferir"></a></td>

@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 @Entity
 //@DiscriminatorValue(value = "P")
 public class Poupanca extends Conta {
-	private static final long serialVersionUID = 1L;
 	private static double rentabilidade;
 	
 	public Poupanca() {

@@ -22,6 +22,8 @@ tr.thead-light {
 	font-weight: bold;
 	background-color: white;
 	margin-bottom: -5px;
+	padding-top: 2px;
+	padding-bottom: 2px;
 }
 
 .contaCliente {

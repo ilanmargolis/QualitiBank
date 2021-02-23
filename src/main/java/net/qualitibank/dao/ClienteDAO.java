@@ -8,7 +8,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import net.qualitibank.model.Cliente;
-import net.qualitibank.model.Conta;
 
 @Stateless
 public class ClienteDAO {
@@ -40,6 +39,8 @@ public class ClienteDAO {
 		return entityManager;
 	}
 
+	// ***** CRUD *****
+	
 	public Cliente getById(final int id) {
 		return entityManager.find(Cliente.class, id);
 	}
@@ -47,13 +48,6 @@ public class ClienteDAO {
 	// Sobrecarga do método, pois no ContaServlet recebo um parâmetro String
 	public Cliente getById(final String id) {
 		return getById(Integer.parseInt(id));
-	}
-
-	@SuppressWarnings("unchecked")
-	public List<Conta> getContas(final int id) {
-		return entityManager.createQuery("FROM " + Conta.class.getName() + " WHERE cliente_id = :cliente_id")
-				.setParameter("cliente_id", id)
-				.getResultList();		
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -38,11 +38,18 @@ public class ContaDAO {
 
 		return entityManager;
 	}
+	
+	// ***** CRUD *****
 
 	public Conta getById(final int id) {
 		return entityManager.find(Conta.class, id);
 	}
-
+	
+	// Sobrecarga do método, pois no ContaServlet recebo um parâmetro String
+	public Conta getById(final String id) {
+		return getById(Integer.parseInt(id));
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Conta> getContasCliente(final int cliente_id) {
 		return entityManager.createQuery("FROM " + Conta.class.getName() + " WHERE cliente_id = :cliente_id")
@@ -53,6 +60,11 @@ public class ContaDAO {
 	@SuppressWarnings("unchecked")
 	public List<Conta> getAll() {
 		return entityManager.createQuery("FROM " + Conta.class.getName()).getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Conta> getAllNoMe(final int conta_id) {
+		return entityManager.createQuery("FROM " + Conta.class.getName() + " WHERE id != " + conta_id).getResultList();
 	}
 
 	public void persist(Conta conta) {

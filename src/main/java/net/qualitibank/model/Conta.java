@@ -1,7 +1,5 @@
 package net.qualitibank.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,9 +13,8 @@ import javax.persistence.ManyToOne;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@DiscriminatorColumn(name = "tipo", length = 1, discriminatorType = DiscriminatorType.STRING)
 //@DiscriminatorValue("C")
-public class Conta implements Serializable {
+public class Conta {
 
-	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Integer id;
@@ -52,21 +49,20 @@ public class Conta implements Serializable {
 		this.saldo += valor;
 	}
 
-	public boolean debitar(double valor) {
+	public void debitar(double valor) throws Exception {
 		if (this.getSaldo() >= valor) {
 			this.saldo -= valor;
-			return true;
 		} else {
-			System.out.println("Saldo insuficiente");
-			return false;
+			throw new Exception("Saldo insuficiente");
 		}
 	}
 
-	public void transferir(Conta conta, double valor) {
-		if (this.debitar(valor)) {
+	public void transferir(Conta conta, double valor) throws Exception {
+		try {
+			this.debitar(valor);
 			conta.creditar(valor);
-		} else {
-			System.out.println("Saldo da conta de origem é insuficiente para o valor a ser transferido");
+		} catch (Exception e) {
+			throw new Exception("Saldo da conta de origem é insuficiente para o valor a ser transferido");
 		}
 	}
 		
