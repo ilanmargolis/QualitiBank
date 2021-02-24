@@ -18,14 +18,14 @@ import net.qualitibank.model.Conta;
 /**
  * Servlet implementation class ClienteServlet
  */
-@WebServlet("/cliente")
-public class ClienteServlet extends HttpServlet {
+@WebServlet("/funcionario")
+public class FuncionarioServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ClienteServlet() {
+	public FuncionarioServlet() {
 		super();
 	}
 
@@ -78,10 +78,7 @@ public class ClienteServlet extends HttpServlet {
 	protected void doGet_listagem(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		List<Cliente> clienteList = ClienteDAO.getInstance().getAll();
-
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/cliente-list.jsp");
-		request.setAttribute("clientes", clienteList);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/forms/funcionario.jsp");
 		dispatcher.forward(request, response);
 	}
 

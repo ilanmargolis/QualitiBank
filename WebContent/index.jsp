@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Internet Qualiti Bank</title>
 </head>
 <body>
 	<!-- redireciono para o servlet carregar a lista de clientes -->
-	<jsp:forward page="/cliente?action=listagem" />
+	<jsp:forward page="/login" />
 </body>
 </html>

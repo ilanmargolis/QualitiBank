@@ -6,26 +6,25 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
 
-import net.qualitibank.model.Cliente;
+import net.qualitibank.model.Funcionario;
 
 @Stateless
-public class ClienteDAO {
+public class FuncionarioDAO {
 
 	protected EntityManager entityManager;
-	private static ClienteDAO instance;
+	private static FuncionarioDAO instance;
 
 	// padrão de projeto Singleton
-	public static ClienteDAO getInstance() {
+	public static FuncionarioDAO getInstance() {
 		if (instance == null) {
-			instance = new ClienteDAO();
+			instance = new FuncionarioDAO();
 		}
 
 		return instance;
 	}
 
-	private ClienteDAO() {
+	private FuncionarioDAO() {
 		entityManager = getEntityManager();
 	}
 
@@ -41,18 +40,18 @@ public class ClienteDAO {
 	}
 
 	// ***** CRUD *****
-	public Cliente getById(final int id) {
-		return entityManager.find(Cliente.class, id);
+	public Funcionario getById(final int id) {
+		return entityManager.find(Funcionario.class, id);
 	}
-
+	
 	// Sobrecarga do método, pois no ContaServlet recebo um parâmetro String
-	public Cliente getById(final String id) {
+	public Funcionario getById(final String id) {
 		return getById(Integer.parseInt(id));
 	}
-
-	public Cliente getByEmail(final String email) {
+		
+	public Funcionario getByEmail(final String email) {
 		try {
-			return (Cliente) entityManager.createQuery("FROM " + Cliente.class.getName() + " WHERE email = :email")
+			return (Funcionario) entityManager.createQuery("FROM " + Funcionario.class.getName() + " WHERE email = :email")
 					.setParameter("email", email).getSingleResult();
 		} catch (Exception e) {
 			return null;
@@ -60,14 +59,14 @@ public class ClienteDAO {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Cliente> getAll() {
-		return entityManager.createQuery("FROM " + Cliente.class.getName()).getResultList();
+	public List<Funcionario> getAll() {
+		return entityManager.createQuery("FROM " + Funcionario.class.getName()).getResultList();
 	}
 
-	public void persist(Cliente cliente) {
+	public void persist(Funcionario funcionario) {
 		try {
 			entityManager.getTransaction().begin();
-			entityManager.persist(cliente);
+			entityManager.persist(funcionario);
 			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -75,10 +74,10 @@ public class ClienteDAO {
 		}
 	}
 
-	public void merge(Cliente cliente) {
+	public void merge(Funcionario funcionario) {
 		try {
 			entityManager.getTransaction().begin();
-			entityManager.merge(cliente);
+			entityManager.merge(funcionario);
 			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -86,11 +85,11 @@ public class ClienteDAO {
 		}
 	}
 
-	public void remove(Cliente cliente) {
+	public void remove(Funcionario funcionario) {
 		try {
 			entityManager.getTransaction().begin();
-			cliente = entityManager.find(Cliente.class, cliente.getId());
-			entityManager.remove(cliente);
+			funcionario = entityManager.find(Funcionario.class, funcionario.getId());
+			entityManager.remove(funcionario);
 			entityManager.getTransaction().commit();
 		} catch (Exception ex) {
 			ex.printStackTrace();
@@ -100,8 +99,8 @@ public class ClienteDAO {
 
 	public void removeById(final int id) {
 		try {
-			Cliente cliente = getById(id);
-			remove(cliente);
+			Funcionario funcionario = getById(id);
+			remove(funcionario);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

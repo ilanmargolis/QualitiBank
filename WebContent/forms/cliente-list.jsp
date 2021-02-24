@@ -21,6 +21,7 @@
 					cliente</a>
 			</h2>
 		</div>
+
 		<div class="conteudo">
 			<table class="table table-bordered">
 				<tr class="thead-dark">
@@ -50,11 +51,13 @@
 					</tr>
 				</c:forEach>
 			</table>
-			<div class="rodape">
-				<p>&copy2021 Qualiti innovative learning & Ilan Margolis</p>
-			</div>
+		</div>
+
+		<div class="rodape">
+			<p>&copy2021 Qualiti innovative learning & Ilan Margolis</p>
 		</div>
 	</div>
+
 	<script
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script

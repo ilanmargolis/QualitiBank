@@ -7,11 +7,12 @@
 
 	<persistence-unit name="qualitibankPU"
 		transaction-type="RESOURCE_LOCAL">
-		<description>Esta unidade gerencia Cliente e Conta.</description>
+		<description>Esta unidade gerencia Cliente, Funcionario, Conta, Poupança e Bonificada.</description>
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
 		<class>net.qualitibank.model.Cliente</class>
+		<class>net.qualitibank.model.Funcionario</class>
 		<class>net.qualitibank.model.Conta</class>
 		<class>net.qualitibank.model.Poupanca</class>
 		<class>net.qualitibank.model.Bonificada</class>

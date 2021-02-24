@@ -29,7 +29,6 @@ public class ContaServlet extends HttpServlet {
 	 */
 	public ContaServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

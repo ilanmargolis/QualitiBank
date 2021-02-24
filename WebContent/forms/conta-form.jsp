@@ -149,6 +149,7 @@
 								<c:forEach var="conta" items="${contasDestino}">
 									<option value="${conta.id}"><c:out
 											value="${conta.numero}" />&nbsp;&nbsp;
+										<c:out value="${conta.tipo}" />&nbsp;&nbsp;
 										<c:out value="${conta.cliente.nome}" /></option>
 								</c:forEach>
 							</select>
